@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_tv_show.*
 import me.yusrisahrul.moviecatalogue.R
 import me.yusrisahrul.moviecatalogue.adapter.TvShowAdapter
-import me.yusrisahrul.moviecatalogue.model.TvShow
+import me.yusrisahrul.moviecatalogue.data.model.TvShow
 import me.yusrisahrul.moviecatalogue.ui.detail.DetailActivity
+import me.yusrisahrul.moviecatalogue.viewmodel.ViewModelFactory
 
 class TvShowFragment : Fragment() {
 
@@ -26,23 +28,30 @@ class TvShowFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
-            val viewModel = ViewModelProvider(this,
-                ViewModelProvider.NewInstanceFactory())[TvShowViewModel::class.java]
-            val tvShow = viewModel.getTvShows()
-            val tvShowAdapter = TvShowAdapter(requireContext(), tvShow)
-            { item: TvShow -> getItemClicked(item) }
+            progress_bar_tv_show.visibility = View.VISIBLE
+            val factory = ViewModelFactory.getInstance()
 
-            with(rv_tv_show) {
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                adapter = tvShowAdapter
-            }
+            val viewModel = ViewModelProvider(this,
+                factory)[TvShowViewModel::class.java]
+            viewModel.getTvShows().observe(viewLifecycleOwner, Observer {
+                progress_bar_tv_show.visibility = View.GONE
+                val tvShowAdapter = TvShowAdapter(requireContext(), it)
+                { item: TvShow -> getItemClicked(item) }
+
+                with(rv_tv_show) {
+                    layoutManager = LinearLayoutManager(context)
+                    setHasFixedSize(true)
+                    adapter = tvShowAdapter
+                }
+            })
+            //val tvShow = viewModel.getTvShows()
+
         }
     }
 
     private fun getItemClicked(item: TvShow) {
         val intent = Intent(activity, DetailActivity::class.java)
-        intent.putExtra("tv_show_id", item.tvShowId)
+        intent.putExtra("tv_show_id", item.id)
         startActivity(intent)
     }
 }

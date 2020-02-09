@@ -1,11 +1,12 @@
 package me.yusrisahrul.moviecatalogue.ui.detail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import me.yusrisahrul.moviecatalogue.model.Movie
-import me.yusrisahrul.moviecatalogue.model.TvShow
-import me.yusrisahrul.moviecatalogue.utils.DataDummy
+import me.yusrisahrul.moviecatalogue.data.source.Repository
+import me.yusrisahrul.moviecatalogue.data.model.Movie
+import me.yusrisahrul.moviecatalogue.data.model.TvShow
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(private val repository: Repository) : ViewModel() {
     private var movieId : String? = null
     private var tvShowId : String? = null
 
@@ -17,26 +18,8 @@ class DetailViewModel : ViewModel() {
         this.tvShowId = tvShowId
     }
 
-    fun getMovies(): Movie {
-        lateinit var movie: Movie
-        val moviesEntities = DataDummy().generateDummyMovies()
-        for (movieEntity in moviesEntities) {
-            if (movieEntity.movieId == movieId) {
-                movie = movieEntity
-            }
-        }
-        return movie
-    }
+    fun getMovies(): LiveData<Movie> = repository.getDetailMovie(movieId)
 
-    fun getTvShows(): TvShow {
-        lateinit var tvShow: TvShow
-        val tvShowEntities = DataDummy().generateDummyTvShows()
-        for (tvShowEntity in tvShowEntities) {
-            if (tvShowEntity.tvShowId == tvShowId) {
-                tvShow = tvShowEntity
-            }
-        }
-        return tvShow
-    }
+    fun getTvShows(): LiveData<TvShow> = repository.getDetailTvShow(tvShowId)
 
 }

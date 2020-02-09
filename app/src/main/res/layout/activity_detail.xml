@@ -53,6 +53,8 @@
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -103,6 +105,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@android:color/black"/>
+
+            <ProgressBar
+                android:id="@+id/progress_bar_detail"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                />
 
             <TextView
                 android:id="@+id/tv_overview_detail"

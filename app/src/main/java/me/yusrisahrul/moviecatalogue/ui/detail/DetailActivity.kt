@@ -1,15 +1,19 @@
 package me.yusrisahrul.moviecatalogue.ui.detail
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import me.yusrisahrul.moviecatalogue.R
 
 import kotlinx.android.synthetic.main.activity_detail.*
-import me.yusrisahrul.moviecatalogue.model.Movie
-import me.yusrisahrul.moviecatalogue.model.TvShow
+import me.yusrisahrul.moviecatalogue.data.model.Movie
+import me.yusrisahrul.moviecatalogue.data.model.TvShow
+import me.yusrisahrul.moviecatalogue.utils.Constant
+import me.yusrisahrul.moviecatalogue.viewmodel.ViewModelFactory
 
 class DetailActivity : AppCompatActivity() {
 
@@ -18,8 +22,11 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
         setSupportActionBar(toolbar)
 
+        progress_bar_detail.visibility = View.VISIBLE
+        val factory = ViewModelFactory.getInstance()
+
         val viewModel = ViewModelProvider(this,
-            ViewModelProvider.NewInstanceFactory())[DetailViewModel::class.java]
+            factory)[DetailViewModel::class.java]
 
         val extras: Bundle? = intent.extras
 
@@ -28,10 +35,16 @@ class DetailActivity : AppCompatActivity() {
 
         if (movieId != null) {
             viewModel.setSelectedMovie(movieId)
-            initDataMovie(viewModel.getMovies())
+            viewModel.getMovies().observe(this, Observer {
+                progress_bar_detail.visibility = View.GONE
+                initDataMovie(it)
+            })
         } else if (tvShowId != null) {
             viewModel.setSelectedTvShow(tvShowId)
-            initDataTvShow(viewModel.getTvShows())
+            viewModel.getTvShows().observe(this, Observer {
+                progress_bar_detail.visibility = View.GONE
+                initDataTvShow(it)
+            })
         }
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -39,11 +52,11 @@ class DetailActivity : AppCompatActivity() {
 
     private fun initDataMovie(movie : Movie) {
         tv_title_detail.text = movie.title
-        tv_rating_detail.text = movie.rating
+        tv_rating_detail.text = movie.vote_average
         tv_overview_detail.text = movie.overview
-        tv_release_detail.text = movie.release
+        tv_release_detail.text = movie.release_date
         Glide.with(this)
-            .load(movie.imagePath)
+            .load(Constant.BASE_IMG_URL + movie.poster_path)
             .apply(
                 RequestOptions.placeholderOf(R.drawable.ic_loading)
                     .error(R.drawable.ic_error))
@@ -52,17 +65,17 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun initDataTvShow(tvShow : TvShow) {
-        tv_title_detail.text = tvShow.title
-        tv_rating_detail.text = tvShow.rating
+        tv_title_detail.text = tvShow.name
+        tv_rating_detail.text = tvShow.vote_average
         tv_overview_detail.text = tvShow.overview
-        tv_release_detail.text = tvShow.release
+        tv_release_detail.text = tvShow.first_air_date
         Glide.with(this)
-            .load(tvShow.imagePath)
+            .load(Constant.BASE_IMG_URL + tvShow.poster_path)
             .apply(
                 RequestOptions.placeholderOf(R.drawable.ic_loading)
                     .error(R.drawable.ic_error))
             .into(img_cover_detail)
-        supportActionBar?.title = tvShow.title
+        supportActionBar?.title = tvShow.name
     }
 
 }

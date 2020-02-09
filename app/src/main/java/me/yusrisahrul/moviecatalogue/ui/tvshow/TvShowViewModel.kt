@@ -1,11 +1,12 @@
 package me.yusrisahrul.moviecatalogue.ui.tvshow
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import me.yusrisahrul.moviecatalogue.model.TvShow
-import me.yusrisahrul.moviecatalogue.utils.DataDummy
+import me.yusrisahrul.moviecatalogue.data.source.Repository
+import me.yusrisahrul.moviecatalogue.data.model.TvShow
 
-class TvShowViewModel : ViewModel() {
+class TvShowViewModel(private val repository: Repository) : ViewModel() {
 
-    fun getTvShows() : List<TvShow> = DataDummy().generateDummyTvShows()
+    fun getTvShows() : LiveData<List<TvShow>> = repository.getAllTvShows()
 
 }
