@@ -10,11 +10,12 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_grid.view.*
 import me.yusrisahrul.moviecatalogue.R
 import me.yusrisahrul.moviecatalogue.data.model.Movie
+import me.yusrisahrul.moviecatalogue.data.source.local.entity.MovieEntity
 import me.yusrisahrul.moviecatalogue.utils.Constant
 
 class MovieAdapter(private val context: Context,
-                   private val items: List<Movie>,
-                   private val listener : (Movie) -> Unit) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+                   private val items: List<MovieEntity>?,
+                   private val listener : (MovieEntity) -> Unit) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
             LayoutInflater.from(context).inflate(
@@ -23,14 +24,14 @@ class MovieAdapter(private val context: Context,
             false))
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = items!!.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(items[position], listener)
+        holder.bind(items!![position], listener)
     }
 
     class MovieViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(movie : Movie, listener: (Movie) -> Unit) {
+        fun bind(movie : MovieEntity, listener: (MovieEntity) -> Unit) {
             with(itemView) {
                 tv_rating.text = movie.vote_average
                 tv_item_title.text = movie.title

@@ -1,5 +1,7 @@
 package me.yusrisahrul.moviecatalogue.data.source.remote
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -23,8 +25,9 @@ class RemoteDataSource private constructor(private val apiInterface: ApiInterfac
             }
     }
 
-    fun getListMovie(loadListMovieCallback : LoadListMovieCallback) {
+    fun getListMovie() : LiveData<ApiResponse<List<Movie>?>> {
         EspressoIdlingResource.increment()
+        val resultMovie = MutableLiveData<ApiResponse<List<Movie>?>>()
         val call = apiInterface.getTopMovies(BuildConfig.API_Key)
         call.subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -38,19 +41,22 @@ class RemoteDataSource private constructor(private val apiInterface: ApiInterfac
                 }
 
                 override fun onNext(value: ResponseMovie?) {
-                    loadListMovieCallback.onAllMoviesReceived(value?.results)
+                    resultMovie.value = ApiResponse.success(value?.results)
+//                    loadListMovieCallback.onAllMoviesReceived(value?.results)
                     EspressoIdlingResource.decrement()
                 }
 
                 override fun onError(e: Throwable?) {
-                    loadListMovieCallback.onAllMoviesNotReceived(e?.message.toString())
+//                    loadListMovieCallback.onAllMoviesNotReceived(e?.message.toString())
                 }
 
             })
+        return resultMovie
     }
 
-    fun getDetailMovie(movieId : String?, detailMovieCallback: LoadDetailMovieCallback) {
+    fun getDetailMovie(movieId : String?) : LiveData<ApiResponse<Movie?>> {
         EspressoIdlingResource.increment()
+        val resultDetailMovie = MutableLiveData<ApiResponse<Movie?>>()
         val call = apiInterface.getDetailMovie(movieId, BuildConfig.API_Key)
         call.subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -64,19 +70,22 @@ class RemoteDataSource private constructor(private val apiInterface: ApiInterfac
                 }
 
                 override fun onNext(value: Movie?) {
-                    detailMovieCallback.onDetailMovieReceived(value)
+                    resultDetailMovie.value = ApiResponse.success(value)
+//                    detailMovieCallback.onDetailMovieReceived(value)
                     EspressoIdlingResource.decrement()
                 }
 
                 override fun onError(e: Throwable?) {
-                    detailMovieCallback.onDetailMovieNotReceived(e?.message.toString())
+//                    detailMovieCallback.onDetailMovieNotReceived(e?.message.toString())
                 }
 
             })
+        return resultDetailMovie
     }
 
-    fun getDetailTvShow(tvShowId : String?, detailTvShowCallback: LoadDetailTvShowCallback) {
+    fun getDetailTvShow(tvShowId : String?) : LiveData<ApiResponse<TvShow?>> {
         EspressoIdlingResource.increment()
+        val resultDetailTvShow = MutableLiveData<ApiResponse<TvShow?>>()
         val call = apiInterface.getDetailTvShow(tvShowId, BuildConfig.API_Key)
         call.subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -90,19 +99,22 @@ class RemoteDataSource private constructor(private val apiInterface: ApiInterfac
                 }
 
                 override fun onNext(value: TvShow?) {
-                    detailTvShowCallback.onDetailTvShowsReceived(value)
+                    resultDetailTvShow.value = ApiResponse.success(value)
+//                    detailTvShowCallback.onDetailTvShowsReceived(value)
                     EspressoIdlingResource.decrement()
                 }
 
                 override fun onError(e: Throwable?) {
-                    detailTvShowCallback.onDetailTvShowsNotReceived(e?.message.toString())
+//                    detailTvShowCallback.onDetailTvShowsNotReceived(e?.message.toString())
                 }
 
             })
+        return resultDetailTvShow
     }
 
-    fun getListTvShow(loadListTvShowCallback: LoadListTvShowCallback) {
+    fun getListTvShow() : LiveData<ApiResponse<List<TvShow>?>> {
         EspressoIdlingResource.increment()
+        val resultTvShow = MutableLiveData<ApiResponse<List<TvShow>?>>()
         val call = apiInterface.getTopTvShows(BuildConfig.API_Key)
         call.subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -116,15 +128,17 @@ class RemoteDataSource private constructor(private val apiInterface: ApiInterfac
                 }
 
                 override fun onNext(value: ResponseTvShow?) {
-                    loadListTvShowCallback.onAllTvShowsReceived(value?.results)
+                    resultTvShow.value = ApiResponse.success(value?.results)
+//                    loadListTvShowCallback.onAllTvShowsReceived(value?.results)
                     EspressoIdlingResource.decrement()
                 }
 
                 override fun onError(e: Throwable?) {
-                    loadListTvShowCallback.onAllTvShowsNotReceived(e?.message.toString())
+//                    loadListTvShowCallback.onAllTvShowsNotReceived(e?.message.toString())
                 }
 
             })
+        return resultTvShow
     }
 
     interface LoadListMovieCallback {

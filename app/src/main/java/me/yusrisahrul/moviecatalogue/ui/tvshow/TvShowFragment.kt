@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,8 +14,10 @@ import kotlinx.android.synthetic.main.fragment_tv_show.*
 import me.yusrisahrul.moviecatalogue.R
 import me.yusrisahrul.moviecatalogue.adapter.TvShowAdapter
 import me.yusrisahrul.moviecatalogue.data.model.TvShow
+import me.yusrisahrul.moviecatalogue.data.source.local.entity.TvShowEntity
 import me.yusrisahrul.moviecatalogue.ui.detail.DetailActivity
 import me.yusrisahrul.moviecatalogue.viewmodel.ViewModelFactory
+import me.yusrisahrul.moviecatalogue.vo.Status
 
 class TvShowFragment : Fragment() {
 
@@ -28,28 +31,39 @@ class TvShowFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
-            progress_bar_tv_show.visibility = View.VISIBLE
-            val factory = ViewModelFactory.getInstance()
+            val factory = ViewModelFactory.getInstance(requireActivity())
 
             val viewModel = ViewModelProvider(this,
                 factory)[TvShowViewModel::class.java]
-            viewModel.getTvShows().observe(viewLifecycleOwner, Observer {
-                progress_bar_tv_show.visibility = View.GONE
-                val tvShowAdapter = TvShowAdapter(requireContext(), it)
-                { item: TvShow -> getItemClicked(item) }
+            viewModel.getTvShows().observe(viewLifecycleOwner, Observer { tvShows ->
+                if (tvShows != null) {
+                    when (tvShows.status) {
+                        Status.LOADING -> progress_bar_tv_show.visibility = View.VISIBLE
+                        Status.SUCCESS -> {
+                            progress_bar_tv_show.visibility = View.GONE
+                            val tvShowAdapter = TvShowAdapter(requireContext(), tvShows.data)
+                            { item: TvShowEntity -> getItemClicked(item) }
 
-                with(rv_tv_show) {
-                    layoutManager = LinearLayoutManager(context)
-                    setHasFixedSize(true)
-                    adapter = tvShowAdapter
+                            with(rv_tv_show) {
+                                layoutManager = LinearLayoutManager(context)
+                                setHasFixedSize(true)
+                                adapter = tvShowAdapter
+                            }
+                        }
+                        Status.ERROR -> {
+                            progress_bar_tv_show.visibility = View.GONE
+                            Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
+
             })
             //val tvShow = viewModel.getTvShows()
 
         }
     }
 
-    private fun getItemClicked(item: TvShow) {
+    private fun getItemClicked(item: TvShowEntity) {
         val intent = Intent(activity, DetailActivity::class.java)
         intent.putExtra("tv_show_id", item.id)
         startActivity(intent)

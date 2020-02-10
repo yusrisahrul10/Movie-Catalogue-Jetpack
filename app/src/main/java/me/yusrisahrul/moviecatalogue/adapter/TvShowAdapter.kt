@@ -10,11 +10,12 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_grid.view.*
 import me.yusrisahrul.moviecatalogue.R
 import me.yusrisahrul.moviecatalogue.data.model.TvShow
+import me.yusrisahrul.moviecatalogue.data.source.local.entity.TvShowEntity
 import me.yusrisahrul.moviecatalogue.utils.Constant
 
 class TvShowAdapter(private val context: Context,
-                    private val items: List<TvShow>,
-                    private val listener : (TvShow) -> Unit) : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
+                    private val items: List<TvShowEntity>?,
+                    private val listener : (TvShowEntity) -> Unit) : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowViewHolder {
         return TvShowViewHolder(
             LayoutInflater.from(context).inflate(
@@ -23,14 +24,14 @@ class TvShowAdapter(private val context: Context,
             false))
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = items!!.size
 
     override fun onBindViewHolder(holder: TvShowViewHolder, position: Int) {
-        holder.bind(items[position], listener)
+        holder.bind(items!![position], listener)
     }
 
     class TvShowViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(tvShow : TvShow, listener: (TvShow) -> Unit) {
+        fun bind(tvShow : TvShowEntity, listener: (TvShowEntity) -> Unit) {
             with(itemView) {
                 tv_rating.text = tvShow.vote_average
                 tv_item_title.text = tvShow.name

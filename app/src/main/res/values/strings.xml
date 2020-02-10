@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Movie Catalogue</string>
     <string name="movie">Movie</string>
+    <string name="menu_bookmark">Bookmark</string>
     <string name="tv_show">Tv Show</string>
+    <string name="favorite">Favorite</string>
     <string name="title_activity_detail">Detail Activity</string>
     <string name="image_desc">Image Desc</string>
     <string name="image_cover">Image Cover</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
