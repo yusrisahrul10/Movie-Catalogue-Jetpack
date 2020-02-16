@@ -2,24 +2,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_movie">
+
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="me.yusrisahrul.moviecatalogue.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_movie"
+        android:name="me.yusrisahrul.moviecatalogue.ui.movie.MovieFragment"
+        android:label="@string/movie"
+        tools:layout="@layout/fragment_movie" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="me.yusrisahrul.moviecatalogue.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_tv_show"
+        android:name="me.yusrisahrul.moviecatalogue.ui.tvshow.TvShowFragment"
+        android:label="@string/tv_show"
+        tools:layout="@layout/fragment_tv_show" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="me.yusrisahrul.moviecatalogue.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_favorite"
+        android:name="me.yusrisahrul.moviecatalogue.ui.favorite.FavoriteFragment"
+        android:label="@string/favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>
