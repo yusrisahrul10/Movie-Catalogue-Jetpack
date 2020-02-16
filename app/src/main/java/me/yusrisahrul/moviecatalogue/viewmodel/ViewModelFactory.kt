@@ -32,7 +32,7 @@ class ViewModelFactory private constructor(private val repository: Repository) :
                 TvShowViewModel(repository) as T
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
-                    return DetailViewModel(repository) as T
+                return DetailViewModel(repository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

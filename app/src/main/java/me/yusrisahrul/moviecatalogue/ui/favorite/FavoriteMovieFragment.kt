@@ -11,19 +11,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_favorite_movie.*
-import kotlinx.android.synthetic.main.fragment_movie.*
 
 import me.yusrisahrul.moviecatalogue.R
-import me.yusrisahrul.moviecatalogue.adapter.MovieAdapter
+import me.yusrisahrul.moviecatalogue.adapter.FavoriteMoviePagedListAdapter
 import me.yusrisahrul.moviecatalogue.data.source.local.entity.MovieEntity
 import me.yusrisahrul.moviecatalogue.ui.detail.DetailActivity
 import me.yusrisahrul.moviecatalogue.ui.movie.MovieViewModel
 import me.yusrisahrul.moviecatalogue.viewmodel.ViewModelFactory
-import me.yusrisahrul.moviecatalogue.vo.Status
 
 
 class FavoriteMovieFragment : Fragment() {
 
+    private lateinit var movieAdapter: FavoriteMoviePagedListAdapter
+    private lateinit var viewModel: MovieViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,21 +33,11 @@ class FavoriteMovieFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
-            val viewModel = ViewModelProvider(this,
-                factory)[MovieViewModel::class.java]
-            viewModel.getFavoriteMovies().observe(viewLifecycleOwner, Observer { movie ->
-                if (movie != null) {
-                    val movieAdapter = MovieAdapter(requireContext(), movie)
-                    { item: MovieEntity -> getItemClicked(item) }
-
-                    with(rv_favorite_movie) {
-                        layoutManager = LinearLayoutManager(context)
-                        setHasFixedSize(true)
-                        adapter = movieAdapter
-                    }
-                }
-
-            })
+            viewModel = ViewModelProvider(
+                this,
+                factory
+            )[MovieViewModel::class.java]
+            initFavorite(viewModel)
         }
     }
 
@@ -55,5 +45,30 @@ class FavoriteMovieFragment : Fragment() {
         val intent = Intent(activity, DetailActivity::class.java)
         intent.putExtra("movie_id", item.id)
         startActivity(intent)
+    }
+
+    private fun initFavorite(viewModel: MovieViewModel) {
+        viewModel.getFavoriteMovies().observe(viewLifecycleOwner, Observer { movie ->
+            if (movie != null) {
+
+                movieAdapter = FavoriteMoviePagedListAdapter()
+                { item: MovieEntity -> getItemClicked(item) }
+
+                movieAdapter.submitList(movie)
+
+                with(rv_favorite_movie) {
+                    layoutManager = LinearLayoutManager(context)
+                    setHasFixedSize(true)
+                    adapter = movieAdapter
+                }
+            }
+
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        initFavorite(viewModel)
     }
 }

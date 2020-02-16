@@ -10,13 +10,14 @@ import me.yusrisahrul.moviecatalogue.data.source.network.ApiInterface
 import me.yusrisahrul.moviecatalogue.utils.AppExecutors
 
 object Injection {
-    fun provideRepository(context : Context): Repository {
+    fun provideRepository(context: Context): Repository {
 
         val database = MovieDatabase.getInstance(context)
 
 
         val remoteDataSource = RemoteDataSource.getInstance(
-            ApiClient().getClient().create(ApiInterface::class.java))
+            ApiClient().getClient().create(ApiInterface::class.java)
+        )
         val localDataSource = LocalDataSource.getInstance(database.movieDao())
         val appExecutors = AppExecutors()
 

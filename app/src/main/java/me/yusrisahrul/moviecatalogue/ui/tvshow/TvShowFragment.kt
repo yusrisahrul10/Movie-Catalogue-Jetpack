@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_tv_show.*
 import me.yusrisahrul.moviecatalogue.R
 import me.yusrisahrul.moviecatalogue.adapter.TvShowAdapter
-import me.yusrisahrul.moviecatalogue.data.model.TvShow
 import me.yusrisahrul.moviecatalogue.data.source.local.entity.TvShowEntity
 import me.yusrisahrul.moviecatalogue.ui.detail.DetailActivity
 import me.yusrisahrul.moviecatalogue.viewmodel.ViewModelFactory
@@ -33,8 +32,10 @@ class TvShowFragment : Fragment() {
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
 
-            val viewModel = ViewModelProvider(this,
-                factory)[TvShowViewModel::class.java]
+            val viewModel = ViewModelProvider(
+                this,
+                factory
+            )[TvShowViewModel::class.java]
             viewModel.getTvShows().observe(viewLifecycleOwner, Observer { tvShows ->
                 if (tvShows != null) {
                     when (tvShows.status) {
@@ -58,8 +59,6 @@ class TvShowFragment : Fragment() {
                 }
 
             })
-            //val tvShow = viewModel.getTvShows()
-
         }
     }
 

@@ -1,6 +1,7 @@
 package me.yusrisahrul.moviecatalogue.data.source.local
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import me.yusrisahrul.moviecatalogue.data.source.local.entity.MovieEntity
 import me.yusrisahrul.moviecatalogue.data.source.local.entity.TvShowEntity
 import me.yusrisahrul.moviecatalogue.data.source.local.room.MovieDao
@@ -14,13 +15,14 @@ class LocalDataSource private constructor(private val mMovieDao: MovieDao) {
             INSTANCE ?: LocalDataSource(mMovieDao)
     }
 
-    fun getAllMovies() : LiveData<List<MovieEntity>> = mMovieDao.getMovies()
+    fun getAllMovies(): LiveData<List<MovieEntity>> = mMovieDao.getMovies()
 
-    fun getAllTvShows() : LiveData<List<TvShowEntity>> = mMovieDao.getTvShows()
+    fun getAllTvShows(): LiveData<List<TvShowEntity>> = mMovieDao.getTvShows()
 
-    fun getBookmarkedMovies(): LiveData<List<MovieEntity>> = mMovieDao.getBookmarkedMovie()
+    fun getBookmarkedMovies(): DataSource.Factory<Int, MovieEntity> = mMovieDao.getBookmarkedMovie()
 
-    fun getBookmarkedTvShows(): LiveData<List<TvShowEntity>> = mMovieDao.getBookmarkedTvShow()
+    fun getBookmarkedTvShows(): DataSource.Factory<Int, TvShowEntity> =
+        mMovieDao.getBookmarkedTvShow()
 
     fun getDetailMovie(id: String?): LiveData<MovieEntity> = mMovieDao.getMovieById(id)
 

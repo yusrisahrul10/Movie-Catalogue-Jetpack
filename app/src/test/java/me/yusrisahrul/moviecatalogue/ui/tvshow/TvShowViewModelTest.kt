@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.verify
 import me.yusrisahrul.moviecatalogue.data.source.Repository
-import me.yusrisahrul.moviecatalogue.data.model.TvShow
+import me.yusrisahrul.moviecatalogue.data.source.local.entity.TvShowEntity
 import me.yusrisahrul.moviecatalogue.utils.DataDummy
+import me.yusrisahrul.moviecatalogue.vo.Resource
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -30,7 +31,7 @@ class TvShowViewModelTest {
     private lateinit var repository: Repository
 
     @Mock
-    private lateinit var observer: Observer<List<TvShow>>
+    private lateinit var observer: Observer<Resource<List<TvShowEntity>>>
 
     @Before
     fun setUp() {
@@ -39,12 +40,12 @@ class TvShowViewModelTest {
 
     @Test
     fun getTvShows() {
-        val dummyTvShows = DataDummy().generateDummyTvShows()
-        val courses = MutableLiveData<List<TvShow>>()
+        val dummyTvShows = Resource.success(DataDummy().generateDummyTvShows())
+        val courses = MutableLiveData<Resource<List<TvShowEntity>>>()
 
         courses.value = dummyTvShows
         Mockito.`when`(repository.getAllTvShows()).thenReturn(courses)
-        val tvShow = viewModel.getTvShows().value
+        val tvShow = viewModel.getTvShows().value?.data
         verify(repository).getAllTvShows()
         assertNotNull(tvShow)
         assertEquals(10, tvShow?.size)

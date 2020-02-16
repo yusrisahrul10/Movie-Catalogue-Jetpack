@@ -2,31 +2,32 @@ package me.yusrisahrul.moviecatalogue.utils
 
 import me.yusrisahrul.moviecatalogue.data.model.Movie
 import me.yusrisahrul.moviecatalogue.data.model.TvShow
+import me.yusrisahrul.moviecatalogue.data.source.local.entity.MovieEntity
+import me.yusrisahrul.moviecatalogue.data.source.local.entity.TvShowEntity
 
 class DataDummy {
 
-    fun generateDummyMovies() : ArrayList<Movie> {
-        val movies = ArrayList<Movie>()
+    fun generateDummyMovies() : List<MovieEntity> {
+        val movies = ArrayList<MovieEntity>()
 
         movies.add(
-            Movie(
-                "1",
-                "Ad Astra",
-                "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
-                        "lNnomQxXpRP9mgUwMuSZhA8LXfA.jpg",
-                "The near future, a time when both hope and hardships drive humanity to " +
-                        "look to the stars and beyond. While a mysterious phenomenon menaces to " +
-                        "destroy life on planet Earth, astronaut Roy McBride undertakes a mission" +
-                        " across the immensity of space and its many perils to uncover the truth " +
-                        "about a lost expedition that decades before boldly faced emptiness and " +
-                        "silence in search of the unknown.",
-                "September 17, 2019",
-                "6.0"
+            MovieEntity(
+                "19404",
+                "Dilwale Dulhania Le Jayenge",
+                "/2CAL2433ZeIihfX1Hb2139CX0pW.jpg",
+                "Raj is a rich, carefree, happy-go-lucky second generation NRI. Simran" +
+                        " is the daughter of Chaudhary Baldev Singh, who in spite of being an NRI" +
+                        " is very strict about adherence to Indian values. Simran has left for" +
+                        " India to be married to her childhood fiancé. Raj leaves for India with" +
+                        " a mission at his hands, to claim his lady love under the noses of her" +
+                        " whole family. Thus begins a saga.",
+                "1995-10-20",
+                "8.8"
             )
         )
 
         movies.add(
-            Movie(
+            MovieEntity(
                 "2",
                 "Star Wars: The Rise of Skywalker",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -40,7 +41,7 @@ class DataDummy {
         )
 
         movies.add(
-            Movie(
+            MovieEntity(
                 "3",
                 "Joker",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -54,7 +55,7 @@ class DataDummy {
         )
 
         movies.add(
-            Movie(
+            MovieEntity(
                 "4",
                 "Jumanji: The Next Level",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -69,7 +70,7 @@ class DataDummy {
         )
 
         movies.add(
-            Movie(
+            MovieEntity(
                 "5",
                 "Maleficent: Mistress of Evil",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -83,7 +84,7 @@ class DataDummy {
         )
 
         movies.add(
-            Movie(
+            MovieEntity(
                 "6",
                 "Ip Man 4: The Finale",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -97,7 +98,7 @@ class DataDummy {
         )
 
         movies.add(
-            Movie(
+            MovieEntity(
                 "7",
                 "Frozen II",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -110,7 +111,7 @@ class DataDummy {
         )
 
         movies.add(
-            Movie(
+            MovieEntity(
                 "8",
                 "Parasite",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -124,7 +125,7 @@ class DataDummy {
         )
 
         movies.add(
-            Movie(
+            MovieEntity(
                 "9",
                 "1917",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -140,7 +141,7 @@ class DataDummy {
         )
 
         movies.add(
-            Movie(
+            MovieEntity(
                 "10",
                 "Gundala",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -158,28 +159,25 @@ class DataDummy {
         return movies
     }
 
-    fun generateDummyTvShows() : ArrayList<TvShow> {
-        val tvShows = ArrayList<TvShow>()
+    fun generateDummyTvShows() : List<TvShowEntity> {
+        val tvShows = ArrayList<TvShowEntity>()
 
         tvShows.add(
-            TvShow(
-                "1",
-                "Vikings",
-                "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
-                        "ff1zhqvwfS5HvRNcA5UFrH0PA2q.jpg",
-                "The adventures of Ragnar Lothbrok, the greatest hero of his age. " +
-                        "The series tells the sagas of Ragnar's band of Viking brothers and his " +
-                        "family, as he rises to become King of the Viking tribes. As well as " +
-                        "being a fearless warrior, Ragnar embodies the Norse traditions of" +
-                        " devotion to the gods. Legend has it that he was a direct descendant" +
-                        " of Odin, the god of war and warriors.",
-                "March 3, 2013",
-                "7.5"
+            TvShowEntity(
+                "100",
+                "I Am Not an Animal",
+                "/nMhv6jG5dtLdW7rgguYWvpbk0YN.jpg",
+                "I Am Not An Animal is an animated comedy series about the only six" +
+                        " talking animals in the world, whose cosseted existence in a vivisection" +
+                        " unit is turned upside down when they are liberated by animal rights" +
+                        " activists.",
+                "2004-05-10",
+                "9.4"
             )
         )
 
         tvShows.add(
-            TvShow(
+            TvShowEntity(
                 "2",
                 "The Mandalorian",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -193,7 +191,7 @@ class DataDummy {
         )
 
         tvShows.add(
-            TvShow(
+            TvShowEntity(
                 "3",
                 "Arrow",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -208,7 +206,7 @@ class DataDummy {
         )
 
         tvShows.add(
-            TvShow(
+            TvShowEntity(
                 "4",
                 "True Cooking Master Boy",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -224,7 +222,7 @@ class DataDummy {
         )
 
         tvShows.add(
-            TvShow(
+            TvShowEntity(
                 "5",
                 "The Flash",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -246,7 +244,7 @@ class DataDummy {
         )
 
         tvShows.add(
-            TvShow(
+            TvShowEntity(
                 "6",
                 "Doctor Who",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -261,7 +259,7 @@ class DataDummy {
         )
 
         tvShows.add(
-            TvShow(
+            TvShowEntity(
                 "7",
                 "The Simpsons",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -279,7 +277,7 @@ class DataDummy {
         )
 
         tvShows.add(
-            TvShow(
+            TvShowEntity(
                 "8",
                 "Rick and Morty",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -296,7 +294,7 @@ class DataDummy {
         )
 
         tvShows.add(
-            TvShow(
+            TvShowEntity(
                 "9",
                 "Law & Order: Special Victims Unit",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -311,7 +309,7 @@ class DataDummy {
         )
 
         tvShows.add(
-            TvShow(
+            TvShowEntity(
                 "10",
                 "Haikyuu!!",
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
@@ -480,149 +478,6 @@ class DataDummy {
             )
         )
 
-        movies.add(
-            Movie(
-                "637",
-                "Life Is Beautiful",
-                "/f7DImXDebOs148U4uPjI61iDvaK.jpg",
-                "A touching story of an Italian book seller of Jewish ancestry who " +
-                        "lives in his own little fairy tale. His creative and happy life would " +
-                        "come to an abrupt halt when his entire family is deported to a " +
-                        "concentration camp during World War II. While locked up he tries to " +
-                        "convince his son that the whole thing is just a game.",
-                "1997-12-20",
-                "8.5"
-            )
-        )
-
-        movies.add(
-            Movie(
-                "13",
-                "Forrest Gump",
-                "/yE5d3BUhE8hCnkMUJOo1QDoOGNz.jpg",
-                "A man with a low IQ has accomplished great things in his life and been" +
-                        " present during significant historic events—in each case, far exceeding" +
-                        " what anyone imagined he could do. But despite all he has achieved," +
-                        " his one true love eludes him.",
-                "1994-07-06",
-                "8.4"
-            )
-        )
-
-        movies.add(
-            Movie(
-                "155",
-                "The Dark Knight",
-                "/pKKvCaL1TPTVtbI6EeliyND3api.jpg",
-                "Batman raises the stakes in his war on crime. With the help of Lt." +
-                        " Jim Gordon and District Attorney Harvey Dent, Batman sets out to " +
-                        "dismantle the remaining criminal organizations that plague the streets. " +
-                        "The partnership proves to be effective, but they soon find themselves" +
-                        " prey to a reign of chaos unleashed by a rising criminal mastermind" +
-                        " known to the terrified citizens of Gotham as the Joker.",
-                "2008-07-16",
-                "8.4"
-            )
-        )
-
-        movies.add(
-            Movie(
-                "311",
-                "Once Upon a Time in America",
-                "/x733R4ISI0RbKeHhVkXdTMFmTFr.jpg",
-                "A former Prohibition-era Jewish gangster returns to the Lower East" +
-                        " Side of Manhattan over thirty years later, where he once again must" +
-                        " confront the ghosts and regrets of his old life.",
-                "1984-05-23",
-                "8.4"
-            )
-        )
-
-        movies.add(
-            Movie(
-                "346",
-                "Seven Samurai",
-                "/v6xrz4fr92KY1oNC3HsEvrsvR1n.jpg",
-                "A samurai answers a village's request for protection after he falls" +
-                        " on hard times. The town needs protection from bandits, so the samurai" +
-                        " gathers six others to help him teach the people how to defend " +
-                        "themselves, and the villagers provide the soldiers with food. A giant" +
-                        " battle occurs when 40 bandits attack the village.",
-                "1954-04-26",
-                "8.4"
-            )
-        )
-
-        movies.add(
-            Movie(
-                "40096",
-                "A Dog's Will",
-                "/m8eFedsS7vQCZCS8WGp5n1bVD0q.jpg",
-                "The lively João Grilo and the sly Chicó are poor guys living in the" +
-                        " hinterland who cheat a bunch of people in a small Northeast Brazil" +
-                        " town. But when they die, they have to be judged by Christ, the Devil " +
-                        "and the Virgin Mary, before they are admitted to paradise.",
-                "2000-09-15",
-                "8.4"
-            )
-        )
-
-        movies.add(
-            Movie(
-                "122",
-                "The Lord of the Rings: The Return of the King",
-                "/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
-                "Aragorn is revealed as the heir to the ancient kings as he, " +
-                        "Gandalf and the other members of the broken fellowship struggle to " +
-                        "save Gondor from Sauron's forces. Meanwhile, Frodo and Sam take the " +
-                        "ring closer to the heart of Mordor, the dark lord's realm.",
-                "2003-12-01",
-                "8.4"
-            )
-        )
-
-        movies.add(
-            Movie(
-                "389",
-                "12 Angry Men",
-                "/3W0v956XxSG5xgm7LB6qu8ExYJ2.jpg",
-                "The defense and the prosecution have rested and the jury is filing " +
-                        "into the jury room to decide if a young Spanish-American is guilty or " +
-                        "innocent of murdering his father. What begins as an open and shut case " +
-                        "soon becomes a mini-drama of each of the jurors' prejudices and " +
-                        "preconceptions about the trial, the accused, and each other.",
-                "1957-04-10",
-                "8.4"
-            )
-        )
-
-        movies.add(
-            Movie(
-                "769",
-                "GoodFellas",
-                "/pwpGfTImTGifEGgLb3s6LRPd4I6.jpg",
-                "The true story of Henry Hill, a half-Irish, half-Sicilian Brooklyn" +
-                        " kid who is adopted by neighbourhood gangsters at an early age and" +
-                        " climbs the ranks of a Mafia family under the guidance of Jimmy Conway.",
-                "1990-09-12",
-                "8.4"
-            )
-        )
-
-        movies.add(
-            Movie(
-                "429",
-                "The Good, the Bad and the Ugly",
-                "/wfPHdfofBD5PN96dV96a51B3Ja2.jpg",
-                "While the Civil War rages between the Union and the Confederacy, " +
-                        "three men – a quiet loner, a ruthless hit man and a Mexican bandit –" +
-                        " comb the American Southwest in search of a strongbox containing " +
-                        "$200,000 in stolen gold.",
-                "1966-12-23",
-                "8.4"
-            )
-        )
-
         return movies
     }
 
@@ -767,149 +622,17 @@ class DataDummy {
             )
         )
 
-        tvShow.add(
-            TvShow(
-                "40075",
-                "Gravity Falls",
-                "/oGsgxjeZ9rd20eCJsGSMGgWvl4P.jpg",
-                "Twin brother and sister Dipper and Mabel Pines are in for an " +
-                        "unexpected adventure when they spend the summer helping their great" +
-                        " uncle Stan run a tourist trap in the mysterious town of Gravity Falls, " +
-                        "Oregon.",
-                "2012-06-15",
-                "8.3"
-            )
-        )
-
-        tvShow.add(
-            TvShow(
-                "246",
-                "Avatar: The Last Airbender",
-                "/sB8V0pQtJZ17v8FLXMOcYz6045c.jpg",
-                "In a war-torn world of elemental magic, a young boy reawakens to" +
-                        " undertake a dangerous mystic quest to fulfill his destiny as the " +
-                        "Avatar, and bring peace to the world.",
-                "2005-02-21",
-                "8.3"
-            )
-        )
-
-        tvShow.add(
-            TvShow(
-                "1438",
-                "The Wire",
-                "/dg7NuKDjmS6OzuNy33qt8kSkPA1.jpg",
-                "Told from the points of view of both the Baltimore homicide and" +
-                        " narcotics detectives and their targets, the series captures a universe" +
-                        " in which the national war on drugs has become a permanent, " +
-                        "self-sustaining bureaucracy, and distinctions between good and evil " +
-                        "are routinely obliterated.",
-                "2002-06-02",
-                "8.3"
-            )
-        )
-
-        tvShow.add(
-            TvShow(
-                "1398",
-                "The Sopranos",
-                "/u0cLcBQITrYqfHsn06fxnQwtqiE.jpg",
-                "The story of New Jersey-based Italian-American mobster Tony Soprano " +
-                        "and the difficulties he faces as he tries to balance the conflicting " +
-                        "requirements of his home life and the criminal organization he heads. " +
-                        "Those difficulties are often highlighted through his ongoing " +
-                        "professional relationship with psychiatrist Jennifer Melfi. The show " +
-                        "features Tony's family members and Mafia associates in prominent roles" +
-                        " and story arcs, most notably his wife Carmela and his cousin and " +
-                        "protégé Christopher Moltisanti.",
-                "1999-01-10",
-                "8.3"
-            )
-        )
-
-        tvShow.add(
-            TvShow(
-                "68595",
-                "Planet Earth II",
-                "/uy5QoTu8fc6fGXMCTMbpQJFUEB0.jpg",
-                "David Attenborough presents a documentary series exploring how" +
-                        " animals meet the challenges of surviving in the most iconic" +
-                        " habitats on earth.",
-                "2016-11-06",
-                "8.3"
-            )
-        )
-
-        tvShow.add(
-            TvShow(
-                "72844",
-                "The Haunting",
-                "/38PkhBGRQtmVx2drvPik3F42qHO.jpg",
-                "The Crains, a fractured family, confront haunting memories of" +
-                        " their old home and the terrifying events that drove them from it.",
-                "2018-10-12",
-                "8.3"
-            )
-        )
-
-        tvShow.add(
-            TvShow(
-                "1400",
-                "Seinfeld",
-                "/aCw8ONfyz3AhngVQa1E2Ss4KSUQ.jpg",
-                "A stand-up comedian and his three offbeat friends weather the " +
-                        "pitfalls and payoffs of life in New York City in the '90s. It's a" +
-                        " show about nothing.",
-                "1989-07-05",
-                "8.2"
-            )
-        )
-
-        tvShow.add(
-            TvShow(
-                "1044",
-                "Planet Earth",
-                "/tI5hLHgrfOTOhPjX22vlo9YsdgE.jpg",
-                "David Attenborough celebrates the amazing variety of the natural" +
-                        " world in this epic documentary series, filmed over four years across" +
-                        " 64 different countries.",
-                "2006-03-05",
-                "8.3"
-            )
-        )
-
-        tvShow.add(
-            TvShow(
-                "70796",
-                "The Marvelous Mrs. Maisel",
-                "/7qxLUcNim8C8x3Bbe10oo12Qywi.jpg",
-                "It’s 1958 Manhattan and Miriam “Midge” Maisel has everything" +
-                        " she’s ever wanted - the perfect husband, kids, and Upper West Side" +
-                        " apartment. But when her life suddenly takes a turn and Midge must start" +
-                        " over, she discovers a previously unknown talent - one that will take " +
-                        "her all the way from the comedy clubs of Greenwich Village to a spot" +
-                        " on Johnny Carson’s couch.",
-                "2017-03-16",
-                "8.3"
-            )
-        )
-
-        tvShow.add(
-            TvShow(
-                "849",
-                "Monty Python's Flying Circus",
-                "/nKiyYqYcRcQLgkLk0LFtRgtGMen.jpg",
-                "A British sketch comedy series with the shows being composed of " +
-                        "surreality, risqué or innuendo-laden humour, sight gags and " +
-                        "observational sketches without punchlines.",
-                "1969-10-05",
-                "8.3"
-            )
-        )
-
         return tvShow
     }
 
+    fun generateDummyDetailMovie(movie: MovieEntity, bookmarked: Boolean): MovieEntity {
+        movie.bookmarked = bookmarked
+        return movie
+    }
 
+    fun generateDummyDetaiTvShow(tvShow: TvShowEntity, bookmarked: Boolean): TvShowEntity {
+        tvShow.bookmarked = bookmarked
+        return tvShow
+    }
 
 }

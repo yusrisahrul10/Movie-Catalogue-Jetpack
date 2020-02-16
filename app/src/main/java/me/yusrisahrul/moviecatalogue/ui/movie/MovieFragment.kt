@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_movie.*
 import me.yusrisahrul.moviecatalogue.R
 import me.yusrisahrul.moviecatalogue.adapter.MovieAdapter
-import me.yusrisahrul.moviecatalogue.data.model. Movie
 import me.yusrisahrul.moviecatalogue.data.source.local.entity.MovieEntity
 import me.yusrisahrul.moviecatalogue.ui.detail.DetailActivity
 import me.yusrisahrul.moviecatalogue.viewmodel.ViewModelFactory
@@ -31,8 +30,10 @@ class MovieFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
-            val viewModel = ViewModelProvider(this,
-                factory)[MovieViewModel::class.java]
+            val viewModel = ViewModelProvider(
+                this,
+                factory
+            )[MovieViewModel::class.java]
             viewModel.getMovies().observe(viewLifecycleOwner, Observer { movie ->
                 if (movie != null) {
                     when (movie.status) {

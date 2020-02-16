@@ -24,10 +24,10 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var viewModel: DetailViewModel
     private var menu: Menu? = null
-    private var movieId : String? = null
-    private var tvShowId : String? = null
-    private var movieEntity : MovieEntity? = null
-    private var tvShowEntity : TvShowEntity? = null
+    private var movieId: String? = null
+    private var tvShowId: String? = null
+    private var movieEntity: MovieEntity? = null
+    private var tvShowEntity: TvShowEntity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +36,10 @@ class DetailActivity : AppCompatActivity() {
 
         val factory = ViewModelFactory.getInstance(this)
 
-        viewModel = ViewModelProvider(this,
-            factory)[DetailViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            factory
+        )[DetailViewModel::class.java]
 
         val extras: Bundle? = intent.extras
 
@@ -57,7 +59,11 @@ class DetailActivity : AppCompatActivity() {
                         }
                         Status.ERROR -> {
                             progress_bar_detail.visibility = View.GONE
-                            Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                applicationContext,
+                                "Terjadi kesalahan",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
@@ -76,7 +82,11 @@ class DetailActivity : AppCompatActivity() {
                         }
                         Status.ERROR -> {
                             progress_bar_detail.visibility = View.GONE
-                            Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                applicationContext,
+                                "Terjadi kesalahan",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
@@ -86,7 +96,7 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun initDataMovie(movie : MovieEntity?) {
+    private fun initDataMovie(movie: MovieEntity?) {
         tv_title_detail.text = movie?.title
         tv_rating_detail.text = movie?.vote_average
         tv_overview_detail.text = movie?.overview
@@ -95,12 +105,13 @@ class DetailActivity : AppCompatActivity() {
             .load(Constant.BASE_IMG_URL + movie?.poster_path)
             .apply(
                 RequestOptions.placeholderOf(R.drawable.ic_loading)
-                    .error(R.drawable.ic_error))
+                    .error(R.drawable.ic_error)
+            )
             .into(img_cover_detail)
         supportActionBar?.title = movie?.title
     }
 
-    private fun initDataTvShow(tvShow : TvShowEntity?) {
+    private fun initDataTvShow(tvShow: TvShowEntity?) {
         tv_title_detail.text = tvShow?.name
         tv_rating_detail.text = tvShow?.vote_average
         tv_overview_detail.text = tvShow?.overview
@@ -109,7 +120,8 @@ class DetailActivity : AppCompatActivity() {
             .load(Constant.BASE_IMG_URL + tvShow?.poster_path)
             .apply(
                 RequestOptions.placeholderOf(R.drawable.ic_loading)
-                    .error(R.drawable.ic_error))
+                    .error(R.drawable.ic_error)
+            )
             .into(img_cover_detail)
         supportActionBar?.title = tvShow?.name
     }
@@ -129,7 +141,11 @@ class DetailActivity : AppCompatActivity() {
                         }
                         Status.ERROR -> {
                             progress_bar_detail.visibility = View.GONE
-                            Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                applicationContext,
+                                "Terjadi kesalahan",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
@@ -147,7 +163,11 @@ class DetailActivity : AppCompatActivity() {
                         }
                         Status.ERROR -> {
                             progress_bar_detail.visibility = View.GONE
-                            Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                applicationContext,
+                                "Terjadi kesalahan",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }

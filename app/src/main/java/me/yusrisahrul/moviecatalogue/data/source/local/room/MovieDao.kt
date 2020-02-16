@@ -1,6 +1,7 @@
 package me.yusrisahrul.moviecatalogue.data.source.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import me.yusrisahrul.moviecatalogue.data.source.local.entity.MovieEntity
 import me.yusrisahrul.moviecatalogue.data.source.local.entity.TvShowEntity
@@ -8,16 +9,16 @@ import me.yusrisahrul.moviecatalogue.data.source.local.entity.TvShowEntity
 @Dao
 interface MovieDao {
     @Query("SELECT * FROM movieentity")
-    fun getMovies() : LiveData<List<MovieEntity>>
+    fun getMovies(): LiveData<List<MovieEntity>>
 
     @Query("SELECT * FROM tvshowentity")
-    fun getTvShows() : LiveData<List<TvShowEntity>>
+    fun getTvShows(): LiveData<List<TvShowEntity>>
 
     @Query("SELECT * FROM movieentity where bookmarked = 1")
-    fun getBookmarkedMovie(): LiveData<List<MovieEntity>>
+    fun getBookmarkedMovie(): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT * FROM tvshowentity where bookmarked = 1")
-    fun getBookmarkedTvShow(): LiveData<List<TvShowEntity>>
+    fun getBookmarkedTvShow(): DataSource.Factory<Int, TvShowEntity>
 
     @Query("SELECT * FROM movieentity WHERE id = :id")
     fun getMovieById(id: String?): LiveData<MovieEntity>

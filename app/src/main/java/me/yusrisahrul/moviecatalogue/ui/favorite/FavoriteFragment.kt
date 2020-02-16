@@ -22,7 +22,8 @@ class FavoriteFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val sectionsPagerAdapter = SectionsPagerAdapter(requireActivity(), requireActivity().supportFragmentManager)
+        val sectionsPagerAdapter =
+            SectionsPagerAdapter(requireActivity(), requireActivity().supportFragmentManager)
         view_pager.adapter = sectionsPagerAdapter
         tabs.setupWithViewPager(view_pager)
     }

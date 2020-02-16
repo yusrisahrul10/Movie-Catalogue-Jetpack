@@ -35,12 +35,21 @@ class MainActivityTest {
     @Test
     fun loadMovies() {
         onView(withId(R.id.rv_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_movie)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyMovies.size))
+        onView(withId(R.id.rv_movie)).perform(
+            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
+                dummyMovies.size
+            )
+        )
     }
 
     @Test
     fun loadDetailMovie() {
-        onView(withId(R.id.rv_movie)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(4, click()))
+        onView(withId(R.id.rv_movie)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                4,
+                click()
+            )
+        )
         onView(withId(R.id.tv_title_detail)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_title_detail)).check(matches(withText(dummyMovies[4].title)))
         onView(withId(R.id.tv_rating_detail)).check(matches(isDisplayed()))
@@ -55,13 +64,22 @@ class MainActivityTest {
     fun loadTvShows() {
         onView(withId(R.id.navigation_tv_show)).perform(click())
         onView(withId(R.id.rv_tv_show)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_tv_show)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyTvShows.size))
+        onView(withId(R.id.rv_tv_show)).perform(
+            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
+                dummyTvShows.size
+            )
+        )
     }
 
     @Test
     fun loadDetailTvShows() {
         onView(withId(R.id.navigation_tv_show)).perform(click())
-        onView(withId(R.id.rv_tv_show)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(2, click()))
+        onView(withId(R.id.rv_tv_show)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                2,
+                click()
+            )
+        )
         onView(withId(R.id.tv_title_detail)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_title_detail)).check(matches(withText(dummyTvShows[2].name)))
         onView(withId(R.id.tv_rating_detail)).check(matches(isDisplayed()))
